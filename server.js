@@ -8,10 +8,10 @@ const app = express();
 // Чтение SSL сертификатов
 const options = {
   cert: fs.readFileSync(
-    "/etc/letsencrypt/live/signal-server.waterhedgehog.com/fullchain.pem"
+    "/etc/letsencrypt/live/chat.waterhedgehog.com/fullchain.pem"
   ),
   key: fs.readFileSync(
-    "/etc/letsencrypt/live/signal-server.waterhedgehog.com/privkey.pem"
+    "/etc/letsencrypt/live/chat.waterhedgehog.com/privkey.pem"
   ),
 };
 
@@ -52,7 +52,7 @@ io.on("connection", (socket) => {
   });
 });
 
-// Запуск сервера на порту 443
+// Запуск сервера на порту 8443
 server.listen(8443, () => {
   console.log(
     "HTTPS сервер запущен на https://signal-server.waterhedgehog.com"
