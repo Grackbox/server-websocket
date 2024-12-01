@@ -1,7 +1,6 @@
 const express = require("express");
 const https = require("https");
 const fs = require("fs");
-const path = require("path");
 const socketIo = require("socket.io");
 
 const app = express();
@@ -19,15 +18,15 @@ const options = {
 // Создание HTTPS сервера
 const server = https.createServer(options, app);
 
-// Инициализация Socket.IO (с привязкой к тому же серверу)
-const io = socketIo(server);
-
-// Статический маршрут для отдачи контента (например, HTML, JS, CSS)
-app.use(express.static(path.join(__dirname, "public")));
-
-// Маршрут для отдачи HTML страницы
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html")); // Путь к вашему HTML файлу
+// Инициализация Socket.IO с настройкой на использование CORS
+const io = socketIo(server, {
+  path: "/ws/socket.io", // Указываем путь для WebSocket соединений
+  cors: {
+    origin: "*", // Разрешить все источники, или укажите конкретный домен, например "https://chat.waterhedgehog.com"
+    methods: ["GET", "POST"], // Разрешить методы GET и POST
+    allowedHeaders: ["my-custom-header"], // Допустимые заголовки
+    credentials: true, // Разрешить передачу cookies (если нужно)
+  },
 });
 
 // Обработчик событий Socket.IO
