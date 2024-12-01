@@ -20,7 +20,6 @@ const server = https.createServer(options, app);
 
 // Инициализация Socket.IO с настройкой на использование CORS
 const io = socketIo(server, {
-  path: "/ws/socket.io", // Указываем путь для WebSocket соединений
   cors: {
     origin: "*", // Разрешить все источники, или укажите конкретный домен, например "https://chat.waterhedgehog.com"
     methods: ["GET", "POST"], // Разрешить методы GET и POST
