@@ -1,27 +1,16 @@
 const express = require("express");
-const https = require("https");
-const fs = require("fs");
+const http = require("http"); // Импортируем http, а не https
 const socketIo = require("socket.io");
 
 const app = express();
 
-// Чтение SSL сертификатов
-const options = {
-  cert: fs.readFileSync(
-    "/etc/letsencrypt/live/chat.waterhedgehog.com/fullchain.pem"
-  ),
-  key: fs.readFileSync(
-    "/etc/letsencrypt/live/chat.waterhedgehog.com/privkey.pem"
-  ),
-};
-
-// Создание HTTPS сервера
-const server = https.createServer(options, app);
+// Создание HTTP сервера
+const server = http.createServer(app);
 
 // Инициализация Socket.IO с настройкой на использование CORS
 const io = socketIo(server, {
   cors: {
-    origin: "*", // Разрешить все источники, или укажите конкретный домен, например "https://chat.waterhedgehog.com"
+    origin: "*", // Разрешить все источники, или укажите конкретный домен
     methods: ["GET", "POST"], // Разрешить методы GET и POST
     allowedHeaders: ["my-custom-header"], // Допустимые заголовки
     credentials: true, // Разрешить передачу cookies (если нужно)
@@ -51,7 +40,7 @@ io.on("connection", (socket) => {
   });
 });
 
-// Запуск сервера на порту 8443
-server.listen(8443, () => {
-  console.log("HTTPS сервер запущен на https://chat.waterhedgehog.com");
+// Запуск сервера на порту 8080
+server.listen(8080, () => {
+  console.log("HTTP сервер запущен на http://chat.waterhedgehog.com:8080");
 });
