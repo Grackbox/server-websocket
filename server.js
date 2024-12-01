@@ -53,7 +53,7 @@ io.on("connection", (socket) => {
 });
 
 // Запуск сервера на порту 443
-server.listen(443, () => {
+server.listen(8443, () => {
   console.log(
     "HTTPS сервер запущен на https://signal-server.waterhedgehog.com"
   );
