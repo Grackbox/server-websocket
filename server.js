@@ -34,6 +34,9 @@ io.on("connection", (socket) => {
     // Отправка полученного сообщения всем клиентам
     io.emit("chat message", data);
   });
+  socket.on("join", (data) => {
+    console.log(`join ${data}`);
+  });
 
   socket.on("disconnect", () => {
     console.log("User disconnected");
