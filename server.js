@@ -35,7 +35,7 @@ io.on("connection", (socket) => {
     io.emit("chat message", data);
   });
   socket.on("join", (data) => {
-    console.log(`join ${data}`);
+    console.log(`join ${data.channelName} ${data.userName}`);
   });
 
   socket.on("disconnect", () => {
