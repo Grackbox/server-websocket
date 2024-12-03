@@ -40,7 +40,7 @@ io.on("connection", (socket) => {
   });
 });
 
-// Запуск сервера на порту 8080
+// Запуск сервера на порту 8080ss
 server.listen(8080, () => {
   console.log("HTTP сервер запущен на http://chat.waterhedgehog.com:8080");
 });
